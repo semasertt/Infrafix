@@ -25,6 +25,10 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+.env.local
+# But allow .env.example (it's safe - just a template)
+!.env.example
+!.env.local.example
 
 # vercel
 .vercel

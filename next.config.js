@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['unpkg.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'unpkg.com',
+      },
+    ],
   },
 }
 

@@ -4,12 +4,17 @@ import { createClient } from '@/lib/supabase/server'
 import './login.css'
 
 export default async function LoginPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
 
-  // If already logged in, redirect to admin
-  if (user) {
-    redirect('/admin')
+    // If already logged in, redirect to admin
+    if (user) {
+      redirect('/admin')
+    }
+  } catch (error) {
+    // Supabase not configured, continue to login page
+    console.warn('Supabase not configured:', error)
   }
 
   return (

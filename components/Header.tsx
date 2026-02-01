@@ -4,18 +4,26 @@ import LogoutButton from './LogoutButton'
 import './Header.css'
 
 export default async function Header() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  // Check if admin
+  let user = null
   let isAdmin = false
-  if (user) {
-    const { data: userData } = await supabase
-      .from('users')
-      .select('role')
-      .eq('id', user.id)
-      .single()
-    isAdmin = userData?.role === 'admin'
+
+  try {
+    const supabase = await createClient()
+    const { data: { user: authUser } } = await supabase.auth.getUser()
+    user = authUser
+
+    // Check if admin
+    if (user) {
+      const { data: userData } = await supabase
+        .from('users')
+        .select('role')
+        .eq('id', user.id)
+        .single()
+      isAdmin = userData?.role === 'admin'
+    }
+  } catch (error) {
+    // Supabase not configured yet, continue without auth
+    console.warn('Supabase not configured:', error)
   }
 
   return (

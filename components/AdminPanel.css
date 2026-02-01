@@ -1,0 +1,105 @@
+.admin-panel {
+  margin-top: 2rem;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.faults-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.fault-card {
+  background-color: var(--bg-primary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+}
+
+.fault-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.fault-header h3 {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+.criticality-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.criticality-badge.level-1 {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.criticality-badge.level-2 {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.criticality-badge.level-3 {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.criticality-badge.level-4 {
+  background-color: #fed7aa;
+  color: #9a3412;
+}
+
+.criticality-badge.level-5 {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.fault-description {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.fault-info {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.fault-info p {
+  margin-bottom: 0.5rem;
+}
+
+.fault-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fault-actions .form-select {
+  margin-bottom: 0.5rem;
+}
+
+.no-data {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .faults-grid {
+    grid-template-columns: 1fr;
+  }
+}

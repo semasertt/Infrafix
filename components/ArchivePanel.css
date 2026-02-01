@@ -1,0 +1,27 @@
+.archive-panel {
+  margin-top: 2rem;
+}
+
+.archived-faults-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.fault-card.archived {
+  opacity: 0.8;
+  border-left: 4px solid var(--secondary-color);
+}
+
+.fault-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .archived-faults-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,3 +1,32 @@
-.admin-page {
-  padding: 2rem 0;
+.admin-page-wrapper {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
 }
+
+.admin-page {
+  flex: 1;
+  padding: 2rem 0;
+  background: var(--bg-secondary);
+}
+
+.admin-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.admin-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.admin-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Admin sayfasında Footer'ı gizle - globals.css'e eklenecek */

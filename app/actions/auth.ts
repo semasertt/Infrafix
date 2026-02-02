@@ -32,17 +32,60 @@ export async function login(formData: FormData): Promise<ApiResponse<{ user: Use
       throw new AuthError('Giriş başarısız')
     }
 
-    // Get user role
-    const role = await getUserRole(data.user.id)
+    // Get user role - direkt sorgu ile, cache sorununu önlemek için
+    let role: string | null = null
+    const { data: userData, error: userError } = await supabase
+      .from('users')
+      .select('role, email')
+      .eq('id', data.user.id)
+      .single()
+    
+    console.log('Login - User data query:', { 
+      userId: data.user.id, 
+      email: data.user.email,
+      userData, 
+      userError: userError?.message,
+      errorCode: userError?.code
+    })
+    
+    if (userError && userError.code === 'PGRST116') {
+      // Kullanıcı public.users'da yok, ekle
+      console.log('User not found in public.users, inserting...')
+      const { error: insertError, data: insertedData } = await supabase
+        .from('users')
+        .insert({
+          id: data.user.id,
+          email: data.user.email || '',
+          role: 'user',
+        })
+        .select()
+        .single()
+      
+      if (insertError && insertError.code !== '23505') { // 23505 = duplicate key
+        console.error('Failed to insert user:', insertError)
+        role = 'user' // Default role
+      } else {
+        role = insertedData?.role || 'user'
+        console.log('User inserted with role:', role)
+      }
+    } else if (userError) {
+      console.error('Error fetching user role:', userError)
+      role = 'user' // Default role
+    } else {
+      role = userData?.role || 'user'
+      console.log('User role found:', role)
+    }
 
     revalidatePath('/')
+    revalidatePath('/admin')
+    
     return {
       success: true,
       data: {
         user: {
           id: data.user.id,
           email: data.user.email || '',
-          role: role || 'user',
+          role: role as 'admin' | 'user',
         },
       },
     }

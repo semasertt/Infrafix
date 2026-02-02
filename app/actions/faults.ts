@@ -56,8 +56,20 @@ export async function getFaults(filters?: FaultFilters): Promise<ApiResponse<Fau
   try {
     await requireAdmin()
 
-    // Validate filters
-    const validatedFilters = filters ? faultFiltersSchema.parse(filters) : {}
+    // Boş string'leri undefined'a çevir (validation hatasını önlemek için)
+    const cleanedFilters = filters ? {
+      ...Object.fromEntries(
+        Object.entries(filters).map(([key, value]) => [
+          key,
+          value === '' || value === null ? undefined : value
+        ])
+      )
+    } : {}
+
+    // Validate filters (sadece tanımlı değerler için)
+    const validatedFilters = Object.keys(cleanedFilters).length > 0 
+      ? faultFiltersSchema.parse(cleanedFilters) 
+      : {}
 
     const supabase = await createClient()
 
@@ -72,15 +84,21 @@ export async function getFaults(filters?: FaultFilters): Promise<ApiResponse<Fau
     if (validatedFilters.durum) {
       query = query.eq('durum', validatedFilters.durum)
     }
+    if (validatedFilters.kritiklik) {
+      query = query.eq('kritiklik', validatedFilters.kritiklik)
+    }
 
     const { data, error } = await query
 
     if (error) {
+      console.error('getFaults error:', error)
       return { success: false, error: error.message }
     }
 
+    console.log('getFaults success:', { count: data?.length || 0, filters: validatedFilters })
     return { success: true, data: data as Fault[] }
   } catch (error) {
+    console.error('getFaults validation error:', error)
     return handleServerActionError(error)
   }
 }

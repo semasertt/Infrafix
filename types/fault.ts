@@ -1,5 +1,5 @@
 // Fault related types
-export type FaultType = 'Elektrik' | 'Su' | 'Yol' | 'Çevre' | 'Diğer'
+export type FaultType = 'Elektrik' | 'Su' | 'Yol' | 'Aydınlatma' | 'Park' | 'Diğer'
 
 export type FaultStatus = 'Beklemede' | 'İnceleniyor' | 'Çözüldü' | 'Arşivlendi'
 
@@ -35,6 +35,7 @@ export interface FaultFormData {
 export interface FaultFilters {
   tur?: FaultType
   durum?: FaultStatus
+  kritiklik?: number | string
   page?: number
   limit?: number
 }
@@ -45,7 +46,7 @@ export interface FaultUpdateData {
 }
 
 // Constants
-export const FAULT_TYPES: FaultType[] = ['Elektrik', 'Su', 'Yol', 'Çevre', 'Diğer']
+export const FAULT_TYPES: FaultType[] = ['Elektrik', 'Su', 'Yol', 'Aydınlatma', 'Park', 'Diğer']
 
 export const FAULT_STATUSES: FaultStatus[] = ['Beklemede', 'İnceleniyor', 'Çözüldü', 'Arşivlendi']
 

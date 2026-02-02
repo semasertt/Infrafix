@@ -42,3 +42,17 @@ next-env.d.ts
 /frontend/node_modules
 /frontend/dist
 /backend/logs
+
+# SQL scripts (opsiyonel - eğer commit etmek istemiyorsanız)
+# /scripts/*.sql
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,8 +1,190 @@
 .footer {
   background-color: var(--bg-primary);
-  border-top: 1px solid var(--border-color);
-  padding: 2rem 0;
-  text-align: center;
-  color: var(--text-secondary);
+  padding: 3rem 0;
   margin-top: auto;
+  width: 100%;
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .footer {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Logo ve Açıklama */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--primary-color);
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.footer-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+[data-theme="dark"] .footer-brand {
+  color: #ffffff;
+}
+
+.footer-description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 300px;
+}
+
+[data-theme="dark"] .footer-description {
+  color: #cbd5e1;
+}
+
+/* Başlıklar */
+.footer-heading {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+}
+
+[data-theme="dark"] .footer-heading {
+  color: #ffffff;
+}
+
+/* Linkler */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+[data-theme="dark"] .footer-link {
+  color: #cbd5e1;
+}
+
+.footer-link:hover {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .footer-link:hover {
+  color: #ffffff;
+}
+
+/* Acil Durum */
+.emergency-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.emergency-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.emergency-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.emergency-number {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .emergency-number {
+  color: #ffffff;
+}
+
+.emergency-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .emergency-label {
+  color: #cbd5e1;
+}
+
+@media (max-width: 968px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footer-column:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 2rem 0;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-description {
+    max-width: 100%;
+  }
+
+  .emergency-contacts {
+    gap: 1rem;
+  }
 }

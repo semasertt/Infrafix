@@ -22,10 +22,28 @@ export default function LoginForm() {
 
     const result = await login(formDataObj)
 
-    if (result.success) {
-      router.push('/admin')
-      router.refresh()
+    if (result.success && result.data?.user) {
+      // Kullanıcı rolüne göre yönlendir
+      const userRole = result.data.user.role || 'user'
+      console.log('Login successful:', {
+        email: result.data.user.email,
+        userId: result.data.user.id,
+        role: userRole,
+        fullResult: result.data.user
+      })
+      
+      if (userRole === 'admin') {
+        // Admin ise admin sayfasına git
+        console.log('Redirecting to admin page...')
+        window.location.href = '/admin'
+      } else {
+        // Normal kullanıcı ise ana sayfaya git
+        console.log('User is not admin, redirecting to home...')
+        router.push('/')
+        router.refresh()
+      }
     } else {
+      console.error('Login failed:', result.error)
       setError(result.error || 'Giriş başarısız')
     }
 

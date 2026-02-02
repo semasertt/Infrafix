@@ -1,0 +1,135 @@
+.user-info-debug {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  font-size: 0.875rem;
+}
+
+.user-info-content h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.user-info-item {
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.user-info-item strong {
+  display: inline-block;
+  min-width: 80px;
+  color: var(--text-primary);
+}
+
+.user-id {
+  display: block;
+  margin-top: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  word-break: break-all;
+  font-family: 'Courier New', monospace;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-left: 0.5rem;
+}
+
+.role-admin {
+  background: #10b981;
+  color: white;
+}
+
+.role-user {
+  background: #6b7280;
+  color: white;
+}
+
+.role-none {
+  background: #ef4444;
+  color: white;
+}
+
+.user-info-warning {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 4px;
+}
+
+.user-info-warning p {
+  margin: 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.user-info-warning p:first-child {
+  margin-top: 0;
+  font-weight: 600;
+  color: #ef4444;
+}
+
+.warning-action {
+  margin-top: 0.75rem !important;
+  font-weight: 600;
+  color: var(--text-primary) !important;
+}
+
+.warning-steps {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+  color: var(--text-primary);
+}
+
+.warning-steps li {
+  margin: 0.5rem 0;
+}
+
+.sql-command {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  overflow-x: auto;
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .user-info-debug {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .sql-command {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .user-info-debug {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    max-width: 100%;
+    margin: 1rem;
+  }
+}

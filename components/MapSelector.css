@@ -2,8 +2,29 @@
   width: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.map-loading {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-tertiary);
 }
 
 .map-selector .leaflet-container {
   border-radius: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.map-selector .leaflet-pane {
+  z-index: 1;
+}
+
+.map-selector .leaflet-top,
+.map-selector .leaflet-bottom {
+  z-index: 2;
 }

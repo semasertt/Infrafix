@@ -15,7 +15,7 @@ const DynamicMap = dynamic(
   { 
     ssr: false,
     loading: () => (
-      <div className="map-selector" style={{ height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f3f4f6' }}>
+      <div className="map-selector map-loading">
         <p>Harita yükleniyor...</p>
       </div>
     )
@@ -23,5 +23,6 @@ const DynamicMap = dynamic(
 )
 
 export default function MapSelector({ location, onLocationSelect }: MapSelectorProps) {
-  return <DynamicMap location={location} onLocationSelect={onLocationSelect} />
+  // Unique key to prevent React Strict Mode double-initialization issues
+  return <DynamicMap key="map-selector-instance" location={location} onLocationSelect={onLocationSelect} />
 }

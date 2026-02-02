@@ -12,7 +12,7 @@ export const locationSchema = z.object({
 export const faultReportSchema = z.object({
   konum: locationSchema,
   aciklama: z.string().min(10, 'Açıklama en az 10 karakter olmalıdır').max(1000, 'Açıklama en fazla 1000 karakter olabilir'),
-  tur: z.enum(['Elektrik', 'Su', 'Yol', 'Çevre', 'Diğer']),
+  tur: z.enum(['Elektrik', 'Su', 'Yol', 'Aydınlatma', 'Park', 'Diğer']),
   kritiklik: z.number().int().min(1).max(5),
   telefon: z.string().optional().nullable(),
   email: z.string().email('Geçerli bir e-posta adresi giriniz').optional().nullable(),
@@ -32,8 +32,23 @@ export const loginSchema = z.object({
 
 // Fault filters validation
 export const faultFiltersSchema = z.object({
-  tur: z.enum(['Elektrik', 'Su', 'Yol', 'Çevre', 'Diğer']).optional(),
-  durum: z.enum(['Beklemede', 'İnceleniyor', 'Çözüldü', 'Arşivlendi']).optional(),
+  tur: z.enum(['Elektrik', 'Su', 'Yol', 'Aydınlatma', 'Park', 'Diğer'])
+    .or(z.literal(''))
+    .transform(val => val === '' ? undefined : val)
+    .optional(),
+  durum: z.enum(['Beklemede', 'İnceleniyor', 'Çözüldü', 'Arşivlendi'])
+    .or(z.literal(''))
+    .transform(val => val === '' ? undefined : val)
+    .optional(),
+  kritiklik: z.union([
+    z.string(),
+    z.number().int().min(1).max(5)
+  ])
+    .optional()
+    .transform(val => {
+      if (val === '' || val === null || val === undefined) return undefined
+      return typeof val === 'string' ? parseInt(val) : val
+    }),
   page: z.number().int().positive().optional(),
   limit: z.number().int().min(1).max(100).optional(),
 })

@@ -22,17 +22,35 @@ export async function getCurrentUser() {
  */
 export async function getUserRole(userId: string): Promise<UserRole | null> {
   const supabase = await createClient()
+  
+  // Cache'i bypass etmek için direkt sorgu yap
   const { data, error } = await supabase
     .from('users')
-    .select('role')
+    .select('role, email')
     .eq('id', userId)
-    .single()
+    .maybeSingle() // single() yerine maybeSingle() kullan - null dönebilir
 
-  if (error || !data) {
+  if (error) {
+    console.error('getUserRole error:', { 
+      userId, 
+      error: error.message, 
+      code: error.code,
+      details: error
+    })
     return null
   }
 
-  return data.role as UserRole
+  if (!data) {
+    console.warn('getUserRole: No data returned for userId:', userId)
+    return null
+  }
+
+  console.log('getUserRole success:', { 
+    userId, 
+    email: data.email,
+    role: data.role 
+  })
+  return (data.role as UserRole) || null
 }
 
 /**
